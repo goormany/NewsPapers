@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> {%extends 'flatpages/default.html'%}
+<head> {% extends 'flatpages/default.html' %}
     <meta charset="UTF-8">
-    <title>{%block title%} {%endblock title%}</title>
+    <title>{% block title %} NEWS {% endblock title %}</title>
 </head>
 <body>
 {% block content %}
-<h1>Da</h1>
+{{news}}
 {% endblock content %}
 </body>
 </html>
