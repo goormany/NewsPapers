@@ -6,3 +6,8 @@ class news(ListView):
     model = Post
     template_name = 'news.html'
     context_object_name = 'news'
+
+class new(DetailView):
+    model = Post
+    template_name = 'new_home.html'
+    context_object_name = 'new'

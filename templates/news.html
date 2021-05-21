@@ -6,7 +6,13 @@
 </head>
 <body>
 {% block content %}
-{{news}}
+<h1><span style="color: #ff0000;">Новости на стайте:</span></h1>
+
+{% for el in news %}
+    <h3>{{ el.title }}</h3>
+    <p>{{ el.preview }}</p>
+    <hr>
+{%endfor%}
 {% endblock content %}
 </body>
 </html>

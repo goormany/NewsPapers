@@ -60,8 +60,7 @@ class Post(models.Model):
         return self.text[0:124] + '...'
 
     def __str__(self):
-        return self.title
-
+        return f'{self.title}: {self.preview()}'
 
     class Meta:
         verbose_name = 'Пост'
