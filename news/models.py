@@ -23,12 +23,17 @@ class Author(models.Model):
         verbose_name = 'Автор'
         verbose_name_plural = 'Авторы'
 
+
+
 class Category(models.Model):
     category_name = models.CharField(max_length=64, unique=True)
 
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
+
+    def __str__(self):
+        return self.category_name
 
 class Post(models.Model):
     PostAuthor = models.ForeignKey(Author, on_delete=models.CASCADE)
@@ -60,7 +65,7 @@ class Post(models.Model):
         return self.text[0:124] + '...'
 
     def __str__(self):
-        return f'{self.title}: {self.preview()}'
+        return f'{self.title}: {self.preview()}, {self.data}'
 
     class Meta:
         verbose_name = 'Пост'
@@ -92,3 +97,6 @@ class Comment(models.Model):
     class Meta:
         verbose_name = 'Коммент'
         verbose_name_plural = 'Комменты'
+
+    def __str__(self):
+        return f'{self.commentUser}: {self.commentPost}: {self.commentText}'
