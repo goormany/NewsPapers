@@ -23,7 +23,8 @@ class Author(models.Model):
         verbose_name = 'Автор'
         verbose_name_plural = 'Авторы'
 
-
+    def __str__(self):
+        return str(self.authorUser)
 
 class Category(models.Model):
     category_name = models.CharField(max_length=64, unique=True)
@@ -41,10 +42,12 @@ class Post(models.Model):
     PostNews = 'PN'
     PostArticle = 'PA'
 
+    # «статья» или «новость»
     POSITIONS = [
         (PostArticle, 'Статья'),
         (PostNews, 'Новость'),
     ]
+
     title = models.CharField(max_length=50)
     positions = models.CharField(max_length=2, choices=POSITIONS, default=PostArticle)
     data = models.DateTimeField(auto_now_add=True)
@@ -79,10 +82,11 @@ class PostCategory(models.Model):
         verbose_name = 'Пост категория'
         verbose_name_plural = 'Пост категории'
 
+
 class Comment(models.Model):
     commentPost = models.ForeignKey(Post, on_delete=models.CASCADE)
     commentUser = models.ForeignKey(User, on_delete=models.CASCADE)
-    commentText = models.TextField(max_length=124)
+    commentText = models.TextField(max_length=60)
     dataCreating = models.DateTimeField(auto_now_add=True)
     rating = models.SmallIntegerField(default=0)
 

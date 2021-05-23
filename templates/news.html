@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> {% extends 'flatpages/default.html' %}
+<head> {% extends 'flatpages/default.html' %} {% load custom_filters %}
     <meta charset="UTF-8">
     <title>{% block title %} NEWS {% endblock title %}</title>
 </head>
@@ -10,9 +10,9 @@
 {% if news %}
 <h6>Всего: {{news|length}} статей</h6>
     {% for el in news %}
-        <h3>{{ el.title }}</h3>
+        <h3>{{ el.title|censor_filter }}</h3>
         <p>{{ el.data|date:'d.M.Y' }}</p>
-        <p>{{ el.preview }}</p>
+        <p>{{ el.preview|censor_filter|truncatechars:21 }}</p>
         <hr>
     {%endfor%}
 {% else %}
