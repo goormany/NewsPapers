@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> {% extends 'flatpages/default.html' %} {% load custom_filters %}
+    <meta charset="UTF-8">
+    <title>{%block title%} Search NEWS {%endblock title%}</title>
+</head>
+<body>
+{%block content%}
+
+    <form method="GET">
+    {{ filter.form }}
+    <input type="submit" value="Найти">
+    </form>
+
+
+    {% for el in newsearch %}
+        {% for product in filter.qs %}
+        <p style="text-align: right;">Дата публикации: {{el.data}}</p>
+        <hr>
+        <h3>{{el.title|censor_filter}}</h3>
+        <br>
+        <h5>{{el.text|censor_filter}}</h5>
+        <hr>
+        <p style="text-align: right;">Пост опубликован: {{el.PostAuthor}}-ом</p>
+        {% endfor %}
+    {%endfor%}
+
+{%endblock content%}
+</body>
+</html>

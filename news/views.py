@@ -9,12 +9,6 @@ class news(ListView):
     context_object_name = 'news'
     ordering = '-data'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['filter'] = newsFilter(self.request.GET, queryset=self.get_queryset())
-        return context
-
-
 
 class new(DetailView):
     model = Post
@@ -25,4 +19,15 @@ class new(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['com_post'] = Comment.objects.filter(commentPost=self.kwargs['pk']).values("commentText")
+        return context
+
+class newSearch(ListView):
+    model = Post
+    template_name = 'new_search.html'
+    context_object_name = 'newsearch'
+    ordering = '-data'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = newsFilter(self.request.GET, queryset=self.get_queryset())
         return context
