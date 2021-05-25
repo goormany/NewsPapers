@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>{%extends 'flatpages/default.html'%} {% load custom_filters %}
+<head>{%extends 'news.html'%} {% load custom_filters %}
     <meta charset="UTF-8">
-    <title>{%block title%} NEWS {%endblock title%}</title>
+    <title>{%block title%} {{new.title|censor_filter}} {%endblock title%}</title>
 </head>
 <body>
 {%block content%}
@@ -12,7 +12,9 @@
 <hr>
 <h5>{{new.text|censor_filter}}</h5>
 <hr>
-<h6>{{new.PostAuthor}}</h6>
+<h6>Пост опубликовал: {{new.PostAuthor}}</h6>
+<hr>
+<p>{{com_post}}</p>
 {%endblock content%}
 </body>
 </html>

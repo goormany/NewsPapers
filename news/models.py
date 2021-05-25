@@ -18,13 +18,13 @@ class Author(models.Model):
         self.authorRating = postRat * 3 + comRat
         self.save()
 
+    def __str__(self):
+        return str(self.authorUser)
 
     class Meta:
         verbose_name = 'Автор'
         verbose_name_plural = 'Авторы'
 
-    def __str__(self):
-        return str(self.authorUser)
 
 class Category(models.Model):
     category_name = models.CharField(max_length=64, unique=True)
@@ -68,7 +68,7 @@ class Post(models.Model):
         return self.text[0:124] + '...'
 
     def __str__(self):
-        return f'{self.title}: {self.preview()}, {self.data}'
+        return self.title
 
     class Meta:
         verbose_name = 'Пост'
@@ -81,6 +81,9 @@ class PostCategory(models.Model):
     class Meta:
         verbose_name = 'Пост категория'
         verbose_name_plural = 'Пост категории'
+
+    def __str__(self):
+        return f'{str(self.pcPost)}, имеет категорию {str(self.pcCategory)}'
 
 
 class Comment(models.Model):
@@ -103,4 +106,4 @@ class Comment(models.Model):
         verbose_name_plural = 'Комменты'
 
     def __str__(self):
-        return f'{self.commentUser}: {self.commentPost}: {self.commentText}'
+        return f'{self.commentUser}: {self.commentPost}: {self.commentText}, {self.pk}'
