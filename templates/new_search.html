@@ -13,17 +13,15 @@
     </form>
 
 
-    {% for el in newsearch %}
-        {% for product in filter.qs %}
-        <p style="text-align: right;">Дата публикации: {{el.data}}</p>
-        <hr>
-        <h3>{{el.title|censor_filter}}</h3>
-        <br>
-        <h5>{{el.text|censor_filter}}</h5>
-        <hr>
-        <p style="text-align: right;">Пост опубликован: {{el.PostAuthor}}-ом</p>
-        {% endfor %}
-    {%endfor%}
+    {% for new in filter.qs %}
+    <p style="text-align: right;">Дата публикации: {{new.data}}</p>
+    <h3>{{new.title|censor_filter}}</h3>
+    <br>
+    <h5>{{new.text|censor_filter}}</h5>
+    <p style="text-align: right;">Пост опубликован: {{new.PostAuthor}}-ом</p>
+    <p style="text-align: right;"><span style="text-align: right; color: #0000ff;">Рейтинг статьи: {{new.rating}}</span></p>
+    <hr>
+    {% endfor %}
 
 {%endblock content%}
 </body>
