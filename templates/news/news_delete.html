@@ -1,0 +1,16 @@
+{% extends 'flatpages/default.html' %} {% load custom_filters %}
+{%block title%} NEWS DELETE {%endblock title%}
+
+{%block content%}
+
+<h2>Удаление поста</h2>
+<h3>Название поста: {{newd.title}}, дата публикования: {{newd.data}}</h3>
+<br>
+<h4>Текст поста:<br><br> {{newd.text}}</h4>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Подтвердить">
+</form>
+
+{%endblock content%}

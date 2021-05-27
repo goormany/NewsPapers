@@ -1,0 +1,15 @@
+{% extends 'flatpages/default.html' %} {% load custom_filters %}
+{%block title%} NEWS ADD {%endblock title%}
+
+{%block content%}
+
+<form method="post">
+    <h3>Создание поста</h3>
+<form method="POST">
+    {% csrf_token %}
+    {{ form }} <!-- Теперь нам нужна только готовая форма и кнопка -->
+    <input type="submit" value="Добавить Пост">
+</form>
+</form>
+
+{%endblock content%}

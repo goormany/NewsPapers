@@ -17,7 +17,8 @@
     <p style="text-align: right;">Дата публикации: {{new.data}}</p>
     <h3>{{new.title|censor_filter}}</h3>
     <br>
-    <h5>{{new.text|censor_filter}}</h5>
+    <br>
+    <h5>{{new.text|truncatechars:50|censor_filter}}</h5>
     <p style="text-align: right;">Пост опубликован: {{new.PostAuthor}}-ом</p>
     <p style="text-align: right;"><span style="text-align: right; color: #0000ff;">Рейтинг статьи: {{new.rating}}</span></p>
     <hr>

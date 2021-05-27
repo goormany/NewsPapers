@@ -74,6 +74,9 @@ class Post(models.Model):
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
 
+    def get_absolute_url(self):
+        return f'/news/{self.id}'
+
 class PostCategory(models.Model):
     pcPost = models.ForeignKey(Post, on_delete=models.CASCADE)
     pcCategory = models.ForeignKey(Category, on_delete=models.CASCADE)
