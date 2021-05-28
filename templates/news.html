@@ -7,7 +7,7 @@
 <body>
 {% block content %}
 <h1><span style="color: #ff0000;">Новости на стайте:</span></h1>
-<h3><a href="{% url 'news_add'%}"><u>Добавить пост</u></a><br></h3><br>
+<h3 style="text-align: left;"><a href="{% url 'news_add'%}"><u>Добавить пост</u></a></h3> <h3 style="text-align: right;"><a href="{% url 'news_search' %}">Поиск<u> новостей</u></a></h3>
 {% if news %}
     {% for el in news %}
         <h3>{{ el.title|censor_filter }}</h3>
