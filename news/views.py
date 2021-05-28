@@ -45,7 +45,7 @@ class newsDelete(DeleteView):
     success_url = '/news/'
 
 class newsUpdate(UpdateView):
-    template_name = 'news/news_create.html'
+    template_name = 'news/news_update.html'
     form_class = NewsForm
 
     def get_object(self, **kwargs):

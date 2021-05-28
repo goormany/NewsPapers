@@ -2,7 +2,7 @@ from django.forms import ModelForm, BooleanField
 from .models import *
 
 class NewsForm(ModelForm):
-    confirm_box = BooleanField(label='Вы подтверждаете свои действия?')
+    check_box = BooleanField(label='Вы подтверждаете свои действия?')
 
     class Meta:
         model = Post
@@ -10,6 +10,8 @@ class NewsForm(ModelForm):
             'PostAuthor',
             'title',
             'positions',
+            'postCategory',
             'previewName',
             'text',
+            'check_box'
         ]
