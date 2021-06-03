@@ -1,0 +1,15 @@
+{% extends "flatpages/default.html" %} {% load socialaccount %}
+
+{% block content %}
+<h2> Зарегистрироваться </h2>
+<form method="post">
+{% csrf_token %}
+{{ form.as_p }}
+{%if user.is_authenticated%}
+    <p>Добро пожаловать {{user.username}}</p>
+{%else%}
+    <a href="{% provider_login_url 'google' %}">Войти с помощью google</a>
+{%endif%}<br><hr>
+<input type="submit" value="Продолжить">
+</form>
+{% endblock %}

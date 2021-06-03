@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.core.paginator import Paginator
 from .filters import newsFilter
 from .forms import NewsForm
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 class news(ListView):
     model = Post
@@ -34,19 +35,22 @@ class newSearch(ListView):
         context['filter'] = newsFilter(self.request.GET, queryset=self.get_queryset())
         return context
 
-class newsCreate(CreateView):
+class newsCreate(CreateView, PermissionRequiredMixin):
     template_name = 'news/news_add.html'
     form_class = NewsForm
+    permission_required = 'news.add_post'
 
-class newsDelete(DeleteView):
+class newsDelete(DeleteView, PermissionRequiredMixin):
     template_name = 'news/news_delete.html'
     queryset = Post.objects.all()
     context_object_name = 'newd'
     success_url = '/news/'
+    permission_required = 'news.delete_post'
 
-class newsUpdate(UpdateView):
+class newsUpdate(UpdateView, PermissionRequiredMixin):
     template_name = 'news/news_update.html'
     form_class = NewsForm
+    permission_required = 'news.change_post'
 
     def get_object(self, **kwargs):
         id = self.kwargs.get('pk')

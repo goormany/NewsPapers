@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from allauth.account.forms import SignupForm
+from django.contrib.auth.models import Group
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(label='email')
@@ -15,3 +17,11 @@ class RegisterForm(UserCreationForm):
                   "email",
                   "password1",
                   "password2",)
+
+class BasicSignupForm(SignupForm):
+
+    def save(self, request):
+        user = super(BasicSignupForm, self).save(request)
+        basic_group = Group.objects.get_by_natural_key(name='common')
+        basic_group.user_set.add(user)
+        return user
