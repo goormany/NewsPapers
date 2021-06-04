@@ -1,4 +1,4 @@
-"# SkillFactory_FPW-13_D2.7_SergeyL"
+
 
 # **Список всех команд, запускаемых в Django Shell**
 
