@@ -11,11 +11,12 @@
     {{ filter.form }}
     <input type="submit" value="Найти">
     </form>
+    <hr>
 
 
     {% for new in filter.qs %}
     <p style="text-align: right;">Дата публикации: {{new.data}}</p>
-    <h3>{{new.title|censor_filter}}</h3>
+    <h3><span style="color: #000000;"><a style="color: #000000;" href="{% url 'news_detail' new.id %}">{{new.title|censor_filter}}</a></span></h3>
     <br>
     <br>
     <h5>{{new.text|truncatechars:50|censor_filter}}</h5>

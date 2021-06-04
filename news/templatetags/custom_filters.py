@@ -4,7 +4,7 @@ from django import template
 register = template.Library()
 
 bad_words = [
-    'Test', 'test', 'bad', 'xxx', 'oloxa', 'test+'
+    'Test', 'test', 'bad', 'xxx', 'oloxa',
 ]
 
 @register.filter(name='censor_filter')
