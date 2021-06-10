@@ -174,3 +174,8 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'testemops'
+EMAIL_HOST_PASSWORD = 'TESTMOPS'
+EMAIL_USE_SSL = True

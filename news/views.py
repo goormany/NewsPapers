@@ -1,3 +1,4 @@
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.paginator import Paginator
@@ -6,7 +7,9 @@ from .forms import NewsForm
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 class news(ListView):
     model = Post
     template_name = 'news.html'
@@ -70,3 +73,5 @@ def subscribe(request, pk):
     else:
         category.subscribers.add(request.user)
     return redirect(request.META.get('HTTP_REFERER'))
+
+
