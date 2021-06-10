@@ -4,6 +4,8 @@ from django.core.paginator import Paginator
 from .filters import newsFilter
 from .forms import NewsForm
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 
 class news(ListView):
     model = Post
@@ -57,3 +59,14 @@ class newsUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     def get_object(self, **kwargs):
         id = self.kwargs.get('pk')
         return Post.objects.get(pk=id)
+
+@login_required
+def subscribe(request, pk):
+    category = Category.objects.get(id=request.POST.get('category_id'))
+
+    if category.subscribers.filter(id=request.user.id).exists():
+        category.subscribers.remove(request.user)
+
+    else:
+        category.subscribers.add(request.user)
+    return redirect(request.META.get('HTTP_REFERER'))
