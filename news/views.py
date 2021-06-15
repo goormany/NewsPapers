@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+
+
 class news(ListView):
     model = Post
     template_name = 'news.html'
@@ -28,6 +30,7 @@ class new(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['com_post'] = Comment.objects.filter(commentPost=self.kwargs['pk']).values("commentText")
+        context['pc_post'] = PostCategory.objects.filter(pcPost=self.kwargs['pk']).values("pcCategory")
         return context
 
 class newSearch(LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -43,11 +46,13 @@ class newSearch(LoginRequiredMixin, PermissionRequiredMixin, ListView):
         return context
 
 class newsCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    model = Post
     template_name = 'news/news_add.html'
     form_class = NewsForm
     permission_required = 'news.add_post'
 
 class newsDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = Post
     template_name = 'news/news_delete.html'
     queryset = Post.objects.all()
     context_object_name = 'newd'
@@ -55,6 +60,7 @@ class newsDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     permission_required = 'news.delete_post'
 
 class newsUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    model = Post
     template_name = 'news/news_update.html'
     form_class = NewsForm
     permission_required = 'news.change_post'
@@ -63,15 +69,17 @@ class newsUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         id = self.kwargs.get('pk')
         return Post.objects.get(pk=id)
 
-@login_required
-def subscribe(request, pk):
-    category = Category.objects.get(id=request.POST.get('category_id'))
+class CategoryDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+    model = Category
+    template_name = 'category/category_detail.html'
+    permission_required = 'news.view_category'
+    context_object_name = 'categores'
 
-    if category.subscribers.filter(id=request.user.id).exists():
-        category.subscribers.remove(request.user)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
-    else:
-        category.subscribers.add(request.user)
-    return redirect(request.META.get('HTTP_REFERER'))
+
+
 
 

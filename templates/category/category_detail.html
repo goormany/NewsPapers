@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> {% extends "flatpages/default.html" %} {% load custom_filters %}
+    <meta charset="UTF-8">
+    <title>{%block title}Категория{%endblock title}</title>
+</head>
+<body>
+{%block content%}
+<h2>Названия категории: {{categores}}</h2><hr><br>
+<form action='subscribers' method="POST">
+        {% csrf_token%}
+        <button type="submit" >Подписаться</button>
+</form>
+{%endblock content%}
+</body>
+</html>

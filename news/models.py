@@ -26,11 +26,10 @@ class Author(models.Model):
         verbose_name_plural = 'Авторы'
 
 
+
 class Category(models.Model):
     category_name = models.CharField(max_length=64, unique=True)
-
-    category_subscriber = models.ManyToManyField(User, blank=True, verbose_name="Подписчик категории")
-
+    subscribers = models.ManyToManyField(User, blank=True, null=True)
 
 
     class Meta:

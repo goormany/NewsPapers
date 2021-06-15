@@ -8,13 +8,18 @@
 {%block content%}
 <h2>{{new.title|censor_filter}}</h2>
 <hr>
-<h4>Статья опубликована: {{new.data}}</h4>
+<h4>Пост опубликован: {{new.data}}</h4>
 <hr>
 <h5>{{new.text|censor_filter}}</h5>
 <hr>
 <h6>Пост опубликовал: {{new.PostAuthor}}</h6>
 <hr>
-<p>{{com_post}}</p>
+{%for pc in pc_post%}
+<button><span style="color: #000000;"><a style="color: #000000;" href="{%url 'category_detail' pc.pcCategory %}">Категория: {{pc.pcCategory}}</a></span></button>
+{%endfor%}
+{%for comment in com_post%}
+<p>Комментарии: {{comment.commentText}}</p>
+{%endfor%}
 {%endblock content%}
 </body>
 </html>
