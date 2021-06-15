@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> {% extends "flatpages/default.html" %} {% load custom_filters %}
+    <meta charset="UTF-8">
+    <title>{%block title%} Отписка оформлена {%endblock title%}</title>
+</head>
+<body>
+{%block content%}
+    <h2>Вы успешно отписались от категории</h2>
+
+<div>
+    <button style="submit"><a href="/news/">На главную страницу</a></button>
+</div>
+{%endblock content%}
+</body>
+</html>

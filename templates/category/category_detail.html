@@ -9,7 +9,11 @@
 <h2>Названия категории: {{categores}}</h2><hr><br>
 <form action='subscribers' method="POST">
         {% csrf_token%}
-        <button type="submit" >Подписаться</button>
+        {% if user in categores.subscribers.all %}
+            <p><span style="color: #000000;"><button type="submit"><a style="color: #000000;" href="{% url 'unsubscribe' categores.id %}">Отписаться</a></button></span></p>
+        {%else%}
+            <p><span style="color: #000000;"><button type="submit"><a style="color: #000000;" href="{% url 'subscribe' categores.id %}">Подписаться</a></button></span></p>
+        {%endif%}
 </form>
 {%endblock content%}
 </body>

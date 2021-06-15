@@ -9,4 +9,9 @@ urlpatterns = [
     path('<int:pk>/delete/', newsDelete.as_view(), name='news_delete'),
     path('<int:pk>/edit/', newsUpdate.as_view(), name='news_update'),
     path('category/<int:pk>/', CategoryDetailView.as_view(), name='category_detail'),
+    path('category/<int:pk>/subscribe/', subscribe, name='subscribe'),
+    path('category/<int:pk>/unsubscribe/', unsubscribe, name='unsubscribe'),
+    path('category/sub/confirm/', SubsConfirm.as_view(), name='sub_confirm'),
+    path('category/sub/unconfirm/', SubsUnConfirm.as_view(), name='sub_unconfirm'),
+    path('categories/', CatigoriesView.as_view(), name = 'categories_list'),
 ]

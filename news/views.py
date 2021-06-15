@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.core.paginator import Paginator
 from .filters import newsFilter
 from .forms import NewsForm
@@ -79,6 +79,41 @@ class CategoryDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView
         context = super().get_context_data(**kwargs)
         return context
 
+
+class SubsConfirm(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    model = Category
+    template_name = 'category/subs_confirm.html'
+    permission_required = 'news.view_category'
+    context_object_name = 'categores'
+
+
+class SubsUnConfirm(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    model = Category
+    template_name = 'category/subs_unconfirm.html'
+    permission_required = 'news.view_category'
+    context_object_name = 'categores'
+
+class CatigoriesView(ListView):
+    template_name = 'category/categories.html'
+    context_object_name = 'categories'
+    queryset = Category.objects.all()
+
+
+@login_required
+def subscribe(request, **kwargs):
+    pk = kwargs.get('pk')
+    category = Category.objects.get(id = pk)
+    category_sub = Category.objects.filter(subscribers = request.user )
+    if not category in category_sub:
+        category.subscribers.add(request.user )
+    return redirect('/news/category/sub/confirm/')
+@login_required
+def unsubscribe(request, **kwargs):
+    pk = kwargs.get('pk')
+    category = Category.objects.get(pk = pk)
+    category.subscribers.remove(request.user)
+    print('unsubscribe')
+    return redirect('/news/category/sub/unconfirm/')
 
 
 
