@@ -2,9 +2,11 @@ from django.contrib import admin
 from .models import *
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'positions', 'data', 'data_update', 'rating', "public")
+    list_display = ('id', 'title', 'positions', 'category_id', 'data', 'data_update', 'rating', "public")
     list_display_links = ('id', 'title',)
     search_fields = ('title', 'id')
+    list_editable = ('public', )
+    list_filter = ('positions', 'data', 'data_update', 'public')
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'category_name')

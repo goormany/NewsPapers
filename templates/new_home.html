@@ -14,17 +14,27 @@
 <hr>
 <h6>Пост опубликовал: {{new.PostAuthor}}</h6>
 <hr>
-{%for pc in pc_post%}
-<h4>Категории:</h4>
-<div class="butmen">
-    <form action="{%url 'category_detail' pc.pcCategory.pk %}">
-        <strong><input style="background: #fff;
-            padding: 7px 21px;
-            color: black; border: none; font-weight: 650; " type="submit" value="{{pc.pcCategory}}"> </strong>
+<h4>Категории: </h4>
+<div>
+    <form action="{% url 'category_detail' new.category_id.pk %}">
+        <input style="background: #fff;
+           padding: 7px 21px;-->
+           color: black; border: none; font-weight: 650; " type="submit" value="{{new.category_id}}">
     </form>
 </div>
 
-{%endfor%}
+
+<!--{%for pc in pc_post%}-->
+<!--<h4>Категории:</h4>-->
+<!--<div class="butmen">-->
+<!--    <form action="{%url 'category_detail' pc.pcCategory.pk %}">-->
+<!--        <strong><input style="background: #fff;-->
+<!--            padding: 7px 21px;-->
+<!--            color: black; border: none; font-weight: 650; " type="submit" value="{{pc.pcCategory}}"> </strong>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--{%endfor%}-->
 
 {%for comment in com_post%}
 <p>Комментарии: {{comment.commentText}}</p>

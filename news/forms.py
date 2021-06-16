@@ -10,7 +10,7 @@ class NewsForm(ModelForm):
             'PostAuthor',
             'title',
             'positions',
-            'postCategory',
+            'category_id',
             'previewName',
             'text',
             'check_box'
