@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>{% extends "flatpages/default.html" %} {% load custom_filters %}
+<head> {% extends "flatpages/default.html" %} {% load custom_filters %}
     <meta charset="UTF-8">
     <title>{%block title%} Подписка оформлена {%endblock title%}</title>
 </head>
 <body>
 {%block content%}
-    <h2>Вы успешно подписались на категорию</h2>
+    <h2>Вы успешно отписались от категории</h2>
 
 <div>
-    <button style="submit"><a href="/news/">На главную страницу</a></button>
+    <form action="/news/"><input type="submit" value="На главную"/> </form> <input type="button" onclick="history.back()" value="Назад"/>
 </div>
 {%endblock content%}
 </body>

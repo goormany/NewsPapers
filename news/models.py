@@ -54,10 +54,13 @@ class Post(models.Model):
     title = models.CharField(max_length=50)
     positions = models.CharField(max_length=2, choices=POSITIONS, default=PostArticle)
     data = models.DateTimeField(auto_now_add=True)
+    data_update = models.DateTimeField(auto_now=True)
     postCategory = models.ManyToManyField(Category, through='PostCategory')
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', default='-')
     previewName = models.CharField(max_length=128)
     text = models.TextField()
     rating = models.SmallIntegerField(default=0)
+    public = models.BooleanField(default=True)
 
     def like(self):
         self.rating +=1

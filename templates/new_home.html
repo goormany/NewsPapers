@@ -15,13 +15,21 @@
 <h6>Пост опубликовал: {{new.PostAuthor}}</h6>
 <hr>
 {%for pc in pc_post%}
-<button><span style="color: #000000;"><a style="color: #000000;" href="{%url 'category_detail' pc.pcCategory %}">Категория: {{pc.pcCategory}}</a></span></button>
+<h4>Категории:</h4>
+<div class="butmen">
+    <form action="{%url 'category_detail' pc.pcCategory.pk %}">
+        <strong><input style="background: #fff;
+            padding: 7px 21px;
+            color: black; border: none; font-weight: 650; " type="submit" value="{{pc.pcCategory}}"> </strong>
+    </form>
+</div>
+
 {%endfor%}
 
 {%for comment in com_post%}
 <p>Комментарии: {{comment.commentText}}</p>
 {%endfor%}
-Hello
+
 {%endblock content%}
 </body>
 </html>

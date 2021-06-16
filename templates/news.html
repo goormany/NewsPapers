@@ -3,6 +3,19 @@
 <head> {% extends 'flatpages/default.html' %} {% load custom_filters %}
     <meta charset="UTF-8">
     <title>{% block title %} NEWS {% endblock title %}</title>
+    <style>
+    button {
+        background: #008EB0;
+        color: #fff;
+        border: none;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+   .green { background: #73A353; }
+   .red { background: #C1172C; }
+   .orange { background: #F7941E; }
+</style>
 </head>
 <body>
 {% block content %}

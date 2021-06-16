@@ -30,7 +30,7 @@ class new(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['com_post'] = Comment.objects.filter(commentPost=self.kwargs['pk']).values("commentText")
-        context['pc_post'] = PostCategory.objects.filter(pcPost=self.kwargs['pk']).values('pcCategory')
+        context['pc_post'] = PostCategory.objects.filter(pcPost=self.kwargs['pk'])
         return context
 
 class newSearch(LoginRequiredMixin, PermissionRequiredMixin, ListView):

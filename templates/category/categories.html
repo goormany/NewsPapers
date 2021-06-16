@@ -1,6 +1,6 @@
 {% extends 'flatpages/default.html' %}
 {% load custom_filters %}
-{% block title %} Catigories {% endblock title %}
+{% block title %} Список категории {% endblock title %}
 {% block content %}
 {% if categories %}
     <table class="detail_table table">
@@ -19,9 +19,13 @@
                 </td>
                 <td>
                     {% if user in category.subscribers.all %}
-                        <p><span style="color: #000000;"><button type="submit"><a style="color: #000000;" href="{% url 'unsubscribe' category.id %}">Отписаться</a></button></span></p>
+                        <form action="{% url 'unsubscribe' category.id %}">
+                            <input type="submit" value="Отписаться"/>
+                        </form>
                     {% else %}
-                        <p><span style="color: #000000;"><button type="submit"><a style="color: #000000;" href="{% url 'subscribe' category.id %}">Подписаться</a></button></span></p>
+                        <form action="{% url 'subscribe' category.id %}">
+                            <input type="submit" value="Подписаться">
+                        </form>
                     {% endif %}
                 </td>
             </tr>
