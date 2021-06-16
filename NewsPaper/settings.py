@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
 
     'django.contrib.sites',
     'django.contrib.flatpages',
@@ -78,6 +79,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 
@@ -179,3 +181,9 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'testemops'
 EMAIL_HOST_PASSWORD = 'TESTMOPS'
 EMAIL_USE_SSL = True
+
+FROM_EMAIL= 'testemops@yandex.ru'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]

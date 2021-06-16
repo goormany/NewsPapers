@@ -17,9 +17,11 @@
 {%for pc in pc_post%}
 <button><span style="color: #000000;"><a style="color: #000000;" href="{%url 'category_detail' pc.pcCategory %}">Категория: {{pc.pcCategory}}</a></span></button>
 {%endfor%}
+
 {%for comment in com_post%}
 <p>Комментарии: {{comment.commentText}}</p>
 {%endfor%}
+Hello
 {%endblock content%}
 </body>
 </html>

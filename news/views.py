@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMix
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import login_required
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives, send_mail
 from django.template.loader import render_to_string
 
 
@@ -30,7 +30,7 @@ class new(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['com_post'] = Comment.objects.filter(commentPost=self.kwargs['pk']).values("commentText")
-        context['pc_post'] = PostCategory.objects.filter(pcPost=self.kwargs['pk']).values("pcCategory")
+        context['pc_post'] = PostCategory.objects.filter(pcPost=self.kwargs['pk']).values('pcCategory')
         return context
 
 class newSearch(LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -50,6 +50,7 @@ class newsCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     template_name = 'news/news_add.html'
     form_class = NewsForm
     permission_required = 'news.add_post'
+
 
 class newsDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Post
@@ -107,6 +108,7 @@ def subscribe(request, **kwargs):
     if not category in category_sub:
         category.subscribers.add(request.user )
     return redirect('/news/category/sub/confirm/')
+
 @login_required
 def unsubscribe(request, **kwargs):
     pk = kwargs.get('pk')
