@@ -18,6 +18,11 @@
     <p style="text-align: right;">Дата публикации: {{new.data}}</p>
     <h3><span style="color: #000000;"><a style="color: #000000;" href="{% url 'news_detail' new.id %}">{{new.title|censor_filter}}</a></span></h3>
     <br>
+    {%if new.photo%}
+        <img src="{{new.photo.url}}" width="350">
+    {%else%}
+
+    {%endif%}
     <br>
     <h5>{{new.text|truncatechars:50|censor_filter}}</h5>
     <p style="text-align: right;">Пост опубликован: {{new.PostAuthor}}-ом</p>

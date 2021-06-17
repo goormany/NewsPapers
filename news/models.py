@@ -57,7 +57,7 @@ class Post(models.Model):
     category_id = models.ForeignKey(Category, verbose_name='Категория', null=True, on_delete=models.CASCADE, related_name='category_id')
     data = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     data_update = models.DateTimeField(auto_now=True, verbose_name='Дата редактирования')
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', default='-', verbose_name='Фото')
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото', blank=True, default='/photos/def/1.jpg/')
     previewName = models.CharField(max_length=128, verbose_name='Превью поста')
     text = models.TextField(verbose_name='Текст поста')
     rating = models.SmallIntegerField(default=0, verbose_name='Рейтинг')

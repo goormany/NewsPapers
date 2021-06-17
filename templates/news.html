@@ -9,14 +9,24 @@
 <h1><span style="color: #ff0000;">Новости на стайте:</span></h1>
 <h3 style="text-align: left;"><a href="{% url 'news_add'%}"><u>Добавить пост</u></a></h3> <h3 style="text-align: right;"><a href="{% url 'news_search' %}">Поиск<u> новостей</u></a></h3>
 {% if news %}
-    {% for el in news %}
-        <h3><span style="color: #000000;"><a style="color: #000000;" href="{% url 'news_detail' el.id %}">{{ el.title|censor_filter }}</a></span></h3>
-        <p>{{ el.data|date:'d.M.Y H:m' }}</p>
-        <p>{{ el.preview|censor_filter|truncatechars:21 }}</p>
-        <a href="{% url 'news_update' el.id %}"><u>Редактировать</u></a>
-        <a href="{% url 'news_delete' el.id %}"><u>Удалить</u></a>
-        <hr>
-    {%endfor%}
+    <div class="media">
+        <div class="media-body">
+                {% for el in news %}
+                    <h3><span style="color: #000000;"><a style="color: #000000;" href="{% url 'news_detail' el.id %}">{{ el.title|censor_filter }}</a></span></h3>
+                    {%if el.photo%}
+                        <img src="{{el.photo.url}}" width="350">
+                    {%else%}
+
+                    {%endif%}
+                    <p>{{ el.data|date:'d.M.Y H:m' }}</p>
+                    <p>{{ el.preview|censor_filter|truncatechars:21 }}</p>
+                    <a href="{% url 'news_update' el.id %}"><u>Редактировать</u></a>
+                    <a href="{% url 'news_delete' el.id %}"><u>Удалить</u></a>
+                    <hr>
+                {%endfor%}
+        </div>
+    </div>
+
 
 
 
