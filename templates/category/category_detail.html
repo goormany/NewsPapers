@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> {% extends "flatpages/default.html" %} {% load custom_filters %}
+<head> {% extends 'flatpages/base.html' %} {% load custom_filters %}
     <meta charset="UTF-8">
     <title>{%block title}Категория{%endblock title}</title>
 </head>
@@ -10,9 +10,9 @@
 <form action='subscribers' method="POST">
         {% csrf_token%}
         {% if user in categores.subscribers.all %}
-            <p><span style="color: #000000;"><button type="submit"><a style="color: #000000;" href="{% url 'unsubscribe' categores.id %}">Отписаться</a></button></span></p>
+            <p><a class="btn btn-secondary " href="{% url 'unsubscribe' categores.id %}">Отписаться</a></p>
         {%else%}
-            <p><span style="color: #000000;"><button type="submit"><a style="color: #000000;" href="{% url 'subscribe' categores.id %}">Подписаться</a></button></span></p>
+            <p><a class="btn btn-primary " href="{% url 'subscribe' categores.id %}">Подписаться</a></p>
         {%endif%}
 </form>
 {%endblock content%}

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> {% extends "flatpages/default.html" %} {% load custom_filters %}
+<head> {% extends 'flatpages/base.html' %} {% load custom_filters %}
     <meta charset="UTF-8">
     <title>{%block title%} Подписка оформлена {%endblock title%}</title>
 </head>
@@ -9,7 +9,7 @@
     <h2>Вы успешно отписались от категории</h2>
 
 <div>
-    <form action="/news/"><input type="submit" value="На главную"/> </form> <input type="button" onclick="history.back()" value="Назад"/>
+    <form action="/news/"><input type="submit" class="btn btn-primary " value="На главную"/> </form> <input type="submit" class="btn btn-primary " onclick="history.back()" value="Назад"/>
 </div>
 {%endblock content%}
 </body>

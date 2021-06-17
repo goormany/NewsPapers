@@ -14,4 +14,5 @@ urlpatterns = [
     path('category/sub/confirm/', SubsConfirm.as_view(), name='sub_confirm'),
     path('category/sub/unconfirm/', SubsUnConfirm.as_view(), name='sub_unconfirm'),
     path('categories/', CatigoriesView.as_view(), name = 'categories_list'),
+    path('post/category/<int:pk>', CategoryFilterView.as_view(), name='cate_filter'),
 ]

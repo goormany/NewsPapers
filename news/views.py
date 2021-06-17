@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
@@ -16,8 +17,20 @@ class news(ListView):
     model = Post
     template_name = 'news.html'
     context_object_name = 'news'
+    # paginate_by = 6
+
     ordering = '-data'
-    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cate'] = Category.objects.all()
+        return context
+
+    def get_queryset(self):
+        return Post.objects.filter(public=True).order_by('-data')
+
+
+
 
 
 class new(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
@@ -50,6 +63,16 @@ class newsCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     template_name = 'news/news_add.html'
     form_class = NewsForm
     permission_required = 'news.add_post'
+
+    # def form_valid(self, form):
+    #     news_day_limit = 3
+    #     author = Author.objects.get(author=self.request.user)
+    #     if len(Post.objects.filter(author=author, post_time__date=datetime.today())) >= news_day_limit:
+    #         return redirect('/news/day_limit')
+    #     else:
+    #         article = form.save()
+    #         mail_new_post.delay(article.pk)
+    #         return super().form_valid(form)
 
 
 class newsDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
@@ -100,6 +123,17 @@ class CatigoriesView(ListView):
     queryset = Category.objects.all()
 
 
+
+class CategoryFilterView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+    permission_required = ("news.view_category", 'news.view_post')
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categorys'] = Post.objects.filter()
+        return context
+
+
 @login_required
 def subscribe(request, **kwargs):
     pk = kwargs.get('pk')
@@ -116,6 +150,31 @@ def unsubscribe(request, **kwargs):
     category.subscribers.remove(request.user)
     print('unsubscribe')
     return redirect('/news/category/sub/unconfirm/')
+
+
+# def mail_new_post(pid):
+#     post = Post.objects.get(pk=pid)
+#     subscribers = list(post.category.subscribers.all().values_list('id', flat=True))
+#     subject = f'Новая статья/новость в категории {post.category}'
+#     for user_id in subscribers:
+#         user = User.objects.get(id=user_id)
+#         email = user.email
+#         html_content = render_to_string(
+#             'message_for_subscribers.html',
+#             {
+#                 'text': post.text,
+#                 'title': post.title,
+#                 'category': post.category,
+#                 'username': user.username,
+#                 'link': f'http://127.0.0.1:8000/news/{post.id}',
+#             })
+#         msg = EmailMultiAlternatives(
+#             subject=subject,
+#             from_email='testemops@yandex.ru',
+#             to=[email],
+#         )
+#         msg.attach_alternative(html_content, "category/category_email_push.html")  # добавляем html
+#         msg.send()
 
 
 

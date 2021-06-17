@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>{%extends 'flatpages/default.html'%} {% load custom_filters %}
+<head>{% extends 'flatpages/base.html' %} {% load custom_filters %}
     <meta charset="UTF-8">
     <title>{%block title%} {{new.title|censor_filter}} {%endblock title%}</title>
 </head>
@@ -18,9 +18,7 @@
 <h4>Категории: </h4>
 <div>
     <form action="{% url 'category_detail' new.category_id.pk %}">
-        <input style="background: #fff;
-           padding: 7px 21px;-->
-           color: black; border: none; font-weight: 650; " type="submit" value="{{new.category_id}}">
+        <input class="btn btn-primary " type="submit" value="{{new.category_id}}">
     </form>
 </div>
 

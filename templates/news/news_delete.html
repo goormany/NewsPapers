@@ -1,16 +1,16 @@
-{% extends 'flatpages/default.html' %} {% load custom_filters %}
+{% extends 'flatpages/base.html' %} {% load custom_filters %}
 {%block title%} NEWS DELETE {%endblock title%}
 
 {%block content%}
 
 <h2>Удаление поста</h2>
-<h3>Название поста: {{newd.title}}<br><hr> дата публикации: {{newd.data}}</h3>
+<h3>Название поста: {{newd.title}}<br><hr> Дата публикации: {{newd.data}}</h3>
 <br>
 <h4>Текст поста:<br><br> {{newd.text}}</h4>
 
-<form method="post">
+<form method="post" class="d-grid gap-2">
     {% csrf_token %}
-    <input type="submit" value="Подтвердить">
+    <input type="submit" class="btn btn-danger" value="Подтвердить">
 </form>
 
 {%endblock content%}

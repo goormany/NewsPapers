@@ -1,4 +1,4 @@
-{% extends 'flatpages/default.html' %}
+{% extends 'flatpages/base.html' %}
 {% load custom_filters %}
 {% block title %} Список категории {% endblock title %}
 {% block content %}
@@ -20,11 +20,11 @@
                 <td>
                     {% if user in category.subscribers.all %}
                         <form action="{% url 'unsubscribe' category.id %}">
-                            <input type="submit" value="Отписаться"/>
+                            <input type="submit" class="btn btn-secondary " value="Отписаться"/>
                         </form>
                     {% else %}
                         <form action="{% url 'subscribe' category.id %}">
-                            <input type="submit" value="Подписаться">
+                            <input type="submit" class="btn btn-primary " value="Подписаться">
                         </form>
                     {% endif %}
                 </td>

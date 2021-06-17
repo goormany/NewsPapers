@@ -1,27 +1,33 @@
-{% extends "flatpages/default.html" %} {% load socialaccount %}
+{% extends 'flatpages/base.html' %} {% load socialaccount %}
 
 {% block content %}
-<h2> Войти в систему </h2>
-<form method="post">
-{% csrf_token %}
-<table>
-<tr>
-    <a> Ведите E-mail </a><input type="text" name="login" placeholder="Email"><br>
-</tr>
-<tr>
-    <a>Введите пароль </a><input type="password" name="password" placeholder="Пароль"><br>
-</tr>
-    {%if user.is_authenticated%}
-        <p>Добро пожаловать {{user.username}}</p>
-    {%else%}
-        <a href="{% provider_login_url 'google' %}">Войти с помощью google</a>
-    {%endif%}
-    <hr>
-</table>
+<div style="text_align: center">
+    <h2> Войти в систему </h2>
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <a> Ведите E-mail </a><input type="text" name="login" placeholder="Email"><br>
+            </tr>
+            <tr>
+                <a>Введите пароль </a><input type="password" name="password" placeholder="Пароль"><br>
+            </tr>
+            {%if user.is_authenticated%}
+            <p>Добро пожаловать {{user.username}}</p>
+            {%else%}
+            <a href="{% provider_login_url 'google' %}">Войти с помощью google</a>
+            {%endif%}
+            <hr>
+        </table>
 
 
+        <input type="submit" class="btn btn-primary" value="Войти">
+    </form>
+    <br>
+    <form action="{% url 'account_signup' %}">
+        <input class="btn btn-dark" type="submit" value="Регистрация">
+    </form>
+</div>
 
-<input type="submit" value="Войти">
-</form>
-<button><a href="{% url 'account_signup' %}">Регистрация</a></button>
+
 {% endblock content %}
