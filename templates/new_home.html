@@ -8,10 +8,14 @@
 {%block content%}
 <h2>{{new.title|censor_filter}}</h2>
 <hr>
-<img src="{{new.photo.url}}" width="350">
+{%if new.photo%}
+<img src="{{new.photo.url}}" width="275">
+{%endif%}
 <h4>Пост опубликован: {{new.data}}</h4>
 <hr>
+{% autoescape off %}
 <h5>{{new.text}}</h5>
+{% endautoescape %}
 <hr>
 <h6>Пост опубликовал: {{new.PostAuthor}}</h6>
 <hr>

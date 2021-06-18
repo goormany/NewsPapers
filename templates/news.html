@@ -10,6 +10,7 @@
         {%for el in cate%}
         <a href="{% url 'cate_filter' el.pk %}" class="list-group-item list-group-item-action active">{{el.category_name}}</a>
         {%endfor%}
+        <a href="{% url 'news_add' %}" class="list-group-item list-group-item active mt-1">Создать пост</a>
     </div>
 </div>
 {%endblock%}
@@ -32,7 +33,9 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title"><a style="color: #000000;" href="{% url 'news_detail' el.id %}">{{ el.title|censor_filter }}</a></h5>
+                    {%autoescape off%}
                     <p class="card-text">{{ el.text|censor_filter|truncatewords:150 }}</p> <a
+                    {%endautoescape %}
                         href="{% url 'news_detail' el.id %}" class="btn btn-primary">Читать полную новость</a>
                     <a href="{% url 'news_update' el.id %}" class="btn btn-primary">Редактировать пост</a>
                     <a href="{% url 'news_delete' el.id %}" class="btn btn-danger">Удалить пост</a>

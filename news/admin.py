@@ -1,7 +1,16 @@
+from django import forms
 from django.contrib import admin
 from .models import *
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+
+class PostAdminForm(forms.ModelForm):
+    text = forms.CharField(widget=CKEditorUploadingWidget())
+    class Meta:
+        model = Post
+        fields = '__all__'
 
 class PostAdmin(admin.ModelAdmin):
+    form = PostAdminForm
     list_display = ('id', 'title', 'positions', 'category_id', 'data', 'data_update', 'rating', "public")
     list_display_links = ('id', 'title',)
     search_fields = ('title', 'id')
@@ -12,6 +21,8 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'category_name')
     list_display_links = ('id', 'category_name',)
     search_fields = ('title',)
+
+
 
 
 admin.site.register(Author)
