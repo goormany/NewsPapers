@@ -20,40 +20,11 @@ class NewsForm(ModelForm):
             'public'
         ]
 
-
-
-        # model = Post
-        # fields = [
-        #     'PostAuthor',
-        #     'title',
-        #     'positions',
-        #     'category_id',
-        #     'previewName',
-        #     'text',
-        #     'photo',
-        #     'public',
-        # ]
-
-        # from django.forms import ModelForm, BooleanField
-        # from .models import *
-        # from django import forms
-        #
-        # class NewsForm(ModelForm):
-        #     check_box = BooleanField(label='Вы подтверждаете свои действия?')
-        #     # title = forms.CharField(max_length=50, label='Название поста')
-        #     # text = forms.CharField(label='Текст поста')
-        #     #  public1 = forms.BooleanField(label='Опубликовано?')
-        #     # category = forms.ModelChoiceField(label='Категория', queryset=Category.objects.all())
-        #
-        # class Meta:
-        #     model = Post
-        #     fields = [
-        #         'PostAuthor',
-        #         'title',
-        #         'positions',
-        #         'category_id',
-        #         'previewName',
-        #         'text',
-        #         'photo',
-        #         'check_box',
-        #     ]
+        widgets = {
+            'PostAuthor': forms.Select(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'positions': forms.Select(attrs={'class': 'form-control'}),
+            'category_id': forms.Select(attrs={'class': 'form-control'}),
+            'previewName': forms.TextInput(attrs={'class': 'form-control'}),
+            'text': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
+        }

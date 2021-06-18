@@ -6,6 +6,7 @@
 {%block sidebar%}
 <div class="col-md-4">
     <div class="list-group">
+        <a href="{% url 'start_news' %}" class="list-group-item list-group-item active mb-1">Все категории</a>
         {%for el in cate%}
         <a href="{% url 'cate_filter' el.pk %}" class="list-group-item list-group-item-action active">{{el.category_name}}</a>
         {%endfor%}
@@ -22,7 +23,6 @@
             <form action="{% url 'category_detail' el.category_id.pk %}"><input class="btn btn-primary " type="submit"
                                                                                 value="{{el.category_id}}"></form>
         </div>
-        <br>
         <div class="row g-0">
             <div class="col-md-4">
                 {%if el.photo%}

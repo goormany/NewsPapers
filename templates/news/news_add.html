@@ -1,15 +1,87 @@
 {% extends 'flatpages/base.html' %} {% load custom_filters %}
 {%block title%} NEWS ADD {%endblock title%}
 
+
+{%block sidebar%}
+<div class="col-md-4">
+    <div class="list-group">
+        {%for el in cate%}
+        <a href="{% url 'cate_filter' el.pk %}" class="list-group-item list-group-item-action active">{{el.category_name}}</a>
+        {%endfor%}
+    </div>
+</div>
+{%endblock%}
+
 {%block content%}
+<div class="col-md-8">
+    <form method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        {{form.non_field.errors}}
+        <div class="mb-3">
+            <label for="{{form.PostAuthor.id_for_label}}" class="form-label">Автор: </label>
+            {{form.PostAuthor}}
+            <div class="invalid-feedback">
+                {{form.PostAuthor.errors}}
+            </div>
+        </div>
 
-<form method="post">
-    <h3>Создание поста</h3>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }} <!-- Теперь нам нужна только готовая форма и кнопка -->
-    <input type="submit" class="btn btn-success" value="Добавить Пост">
-</form>
-</form>
+        <div class="mb-3">
+            <label for="{{form.positions.id_for_label}}" class="form-label">Тип поста: </label>
+            {{form.positions}}
+            <div class="invalid-feedback">
+                {{form.positions.errors}}
+            </div>
+        </div>
 
-{%endblock content%}
+        <div class="mb-3">
+            <label for="{{form.category_id.id_for_label}}" class="form-label">Категории: </label>
+            {{form.category_id}}
+            <div class="invalid-feedback">
+                {{form.category_id.errors}}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="{{form.title.id_for_label}}" class="form-label">Название: </label>
+            {{form.title}}
+            <div class="invalid-feedback">
+                {{form.title.errors}}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="{{form.previewName.id_for_label}}" class="form-label">Превью поста: </label>
+            {{form.previewName}}
+            <div class="invalid-feedback">
+                {{form.previewName.errors}}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="{{form.text.id_for_label}}" class="form-label">Текст поста: </label>
+            {{form.text}}
+            <div class="invalid-feedback">
+                {{form.text.errors}}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="{{form.photo.id_for_label}}" class="form-label">Фотография: </label>
+            {{form.photo}}
+            <div class="invalid-feedback">
+                {{form.photo.errors}}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="{{form.public.id_for_label}}" class="form-label">Опубликовано? </label>
+            {{form.public}}
+            <div class="invalid-feedback">
+                {{form.public.errors}}
+            </div>
+        </div>
+
+        <input type="submit" class="btn btn-success" value="Добавить Пост">
+    </form>
+</div>
+{%endblock%}

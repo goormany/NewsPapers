@@ -2,7 +2,7 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('', news.as_view()),
+    path('', news.as_view(), name='start_news'),
     path('<int:pk>', new.as_view(), name='news_detail'),
     path('search/', newSearch.as_view(), name='news_search'),
     path('add/', newsCreate.as_view(), name='news_add'),

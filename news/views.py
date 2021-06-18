@@ -19,7 +19,6 @@ class news(ListView):
     context_object_name = 'news'
     # paginate_by = 6
 
-    ordering = '-data'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -63,6 +62,12 @@ class newsCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     template_name = 'news/news_add.html'
     form_class = NewsForm
     permission_required = 'news.add_post'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cate'] = Category.objects.all()
+        return context
 
     # def form_valid(self, form):
     #     news_day_limit = 3
@@ -124,14 +129,19 @@ class CatigoriesView(ListView):
 
 
 
-class CategoryFilterView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
-    permission_required = ("news.view_category", 'news.view_post')
+class CategoryFilterView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Post
+    template_name = 'news.html'
+    context_object_name = 'news'
+    permission_required = ('news.view_post', 'news.view_category')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categorys'] = Post.objects.filter()
+        context['cate'] = Category.objects.all()
         return context
+
+    def get_queryset(self):
+        return Post.objects.filter(category_id=self.kwargs['pk'], public=True).order_by('-data')
 
 
 @login_required
