@@ -6,4 +6,7 @@ class NewsConfig(AppConfig):
     name = 'news'
     verbose_name = 'Посты'
 
+    def ready(self):
+        import news.signals
+
 
