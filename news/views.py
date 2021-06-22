@@ -141,7 +141,7 @@ def subscribe(request, **kwargs):
     category_sub = Category.objects.filter(subscribers=request.user)
     if not category in category_sub:
         category.subscribers.add(request.user)
-    return redirect('/news/category/sub/confirm/')
+    return redirect('/news/categories/')
 
 
 @login_required
@@ -150,4 +150,4 @@ def unsubscribe(request, **kwargs):
     category = Category.objects.get(pk=pk)
     category.subscribers.remove(request.user)
     print('unsubscribe')
-    return redirect('/news/category/sub/unconfirm/')
+    return redirect('/news/categories/')

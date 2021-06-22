@@ -11,14 +11,17 @@ from django.shortcuts import redirect
 
 @receiver(post_save, sender=Post)
 def sub_mail(sender, instance, created, **kwargs):
+    l = []
+    for x in instance.category_id.subscribers.all():
+        l.append(x.email)
     if created:
         subject = f'{instance.title} {instance.data.strftime("%d %m %Y")}'
     else:
-        subject = f'Изменено  {instance.previewName} {instance.data.strftime("%d %m %Y")}'
+        subject = f'Изменено  {instance.title} {instance.data.strftime("%d %m %Y")}'
 
     send_mail(
         subject=subject,
         message=instance.text,
         from_email='testemops@yandex.ru',
-        recipient_list=['testemops@yandex.ru']
+        recipient_list=l
     )
