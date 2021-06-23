@@ -7,8 +7,8 @@
 </head>
 <body>
     <h2>Здравствуй, {{ username }}. Новая статья в твоём любимом разделе!</h2>
-    <h3>{{ post.header }}</h3>
-    <p>{{ post_text }}<a href="http://127.0.0.1:8000{% url 'post_detail' post.id %}">...</a></p>
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.text }}<a href="http://127.0.0.1:8000{% url 'post_detail' post.id %}">...</a></p>
 
 </body>
 </html>

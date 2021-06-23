@@ -1,19 +1,25 @@
-import inspect
-from django.template.loader import render_to_string
-from django.contrib.sites.shortcuts import get_current_site
 from .models import *
 from django.db.models.signals import *
 from django.dispatch import receiver
-from django.core.mail import send_mail, EmailMultiAlternatives
-from django.contrib.auth.models import Group
-from django.contrib.auth.models import User
-from django.shortcuts import redirect
+from django.core.mail import send_mail
+import datetime
+
+@receiver(pre_save, sender=Post)
+def pre_save_handler(sender, instance, *args, **kwargs):
+    start_date = datetime.datetime.today().date()
+    end_date = start_date+datetime.timedelta(days=1)
+    print(instance.PostAuthor)
+    posts_quantity = Post.objects.filter(PostAuthor=instance.PostAuthor, data__range=(start_date, end_date))
+    print(len(posts_quantity))
+    if len(posts_quantity) > 3:
+        raise Exception('Больше 3-х')
+
 
 @receiver(post_save, sender=Post)
 def sub_mail(sender, instance, created, **kwargs):
-    l = []
-    for x in instance.category_id.subscribers.all():
-        l.append(x.email)
+    sub_list = []
+    for sub in instance.category_id.subscribers.all():
+        sub_list.append(sub.email)
     if created:
         subject = f'{instance.title} {instance.data.strftime("%d %m %Y")}'
     else:
@@ -23,5 +29,6 @@ def sub_mail(sender, instance, created, **kwargs):
         subject=subject,
         message=instance.text,
         from_email='testemops@yandex.ru',
-        recipient_list=l
+        recipient_list=sub_list
     )
+
