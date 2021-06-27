@@ -1,5 +1,7 @@
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
+
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.core.paginator import Paginator
@@ -66,7 +68,6 @@ class newsCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['cate'] = Category.objects.all()
         return context
-
 
 class newsDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Post
