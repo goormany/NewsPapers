@@ -9,5 +9,6 @@
     <h2>Новая статья в твоём любимом разделе!</h2>
     <h3>{{ post.title }}</h3>
     <p>{{ post.text }}</p>
+    <p><a href="{{site}}{{ post.get_absolute_url }}" class="btn btn-primary">Перейти к посту</a></p>
 </body>
 </html>

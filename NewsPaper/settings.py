@@ -191,6 +191,7 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'testemops'
 EMAIL_HOST_PASSWORD = 'TESTMOPS'
 EMAIL_USE_SSL = True
+BASE_URL = 'http://127.0.0.1:8000'
 
 SERVER_EMAIL = 'testemops@yandex.ru'
 DEFAULT_FROM_EMAIL = 'testemops@yandex.ru'

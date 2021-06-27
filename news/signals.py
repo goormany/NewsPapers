@@ -5,6 +5,7 @@ from django.db.models.signals import *
 from django.dispatch import receiver
 from django.core.mail import send_mail, EmailMultiAlternatives
 import datetime
+from django.conf import settings
 
 # @receiver(pre_save, sender=Post)
 # def pre_save_handler(sender, instance, *args, **kwargs):
@@ -37,14 +38,16 @@ import datetime
 
 @receiver(post_save, sender=Post)
 def sub_mail_v2(sender, instance, **kwargs):
-    post = Post
+    post = instance
     sub_list = []
     for sub in instance.category_id.subscribers.all():
         sub_list.append(sub.email)
     html_content = render_to_string(
         'send_notify_post_create.html',
         {
+            'username': sub,
             'post': post,
+            'site': settings.BASE_URL,
         }
     )
     msg = EmailMultiAlternatives(
