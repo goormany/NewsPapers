@@ -1,21 +1,13 @@
-<!doctype html>
-<html lang="ru">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>News Portal</title>
-  </head>
-  <body>
-  <p>Здравствуй, {{username}}. Новости за прошлую неделю в категории {{ category }}:</p>
-  <div>
-    {% for post in posts %}
-    <div style="border:1px solid black; text-align:center; margin-bottom:5px">
-      <a href="{{ site }}{{ post.get_absolute_url }}"><h2>{{ post.title }}</h2></a>
-      <div style="text-align:center"><small>{{ post.data  }}</small></div>
-      <p>{{ post.text|truncatechars:150 }}</p>
-      <a href="{{ site }}{{ post.get_absolute_url }}">перейти к статье</a>
-    </div>
-    {% endfor %}
-  </div>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Update.html</title>
+</head>
+<body>
+    <h2>Ув. читатель {{ new.postAuthor }} ,</h2>
+    <<a href="{{site}}{{ post.get_absolute_url }}" class="btn btn-primary">Перейти к посту</a>
+    <p>Новая публикация <i>   </i> в категории {{ previewName }} по ссылке http://127.0.0.1:8000/news/{{ news.id }}<br>Сайт публикаций</p>
+</body>
 </html>

@@ -20,30 +20,30 @@ logger = logging.getLogger(__name__)
 
 
 # наша задача по выводу текста на экран
-def day7_mail():
-    for category in Category.objects.all():
-        subject = f'Последние статьи за 7 дней в категории {category}'
-        end_date = timezone.now()
-        start_date = end_date - timedelta(minutes=3)
-        posts = Post.objects.filter(postCategory=category, data__range=(start_date, end_date))
-        if posts.exists():
-            for sub in category.subscibers.all():
-                html_content = render_to_string(
-                    'weekly_mailing.html',
-                    {
-                        'username': sub,
-                        'posts': posts,
-                        'category': category,
-                        'site': settings.BASE_URL,
-                    }
-                )
-                msg = EmailMultiAlternatives(
-                    subject=subject,
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    to=sub.email
-                )
-                msg.attach_alternative(html_content, 'text/html')
-                msg.send()
+# def day7_mail():
+#     for category in Category.objects.all():
+#         subject = f'Последние статьи за 7 дней в категории {category}'
+#         end_date = timezone.now()
+#         start_date = end_date - timedelta(minutes=3)
+#         posts = Post.objects.filter(postCategory=category, data__range=(start_date, end_date))
+#         if posts.exists():
+#             for sub in category.subscibers.all():
+#                 html_content = render_to_string(
+#                     'weekly_mailing.html',
+#                     {
+#                         'username': sub,
+#                         'posts': posts,
+#                         'category': category,
+#                         'site': settings.BASE_URL,
+#                     }
+#                 )
+#                 msg = EmailMultiAlternatives(
+#                     subject=subject,
+#                     from_email=settings.DEFAULT_FROM_EMAIL,
+#                     to=sub.email
+#                 )
+#                 msg.attach_alternative(html_content, 'text/html')
+#                 msg.send()
 
 
 
@@ -62,15 +62,15 @@ class Command(BaseCommand):
         scheduler.add_jobstore(DjangoJobStore(), "default")
 
         # добавляем работу нашему задачнику
-        scheduler.add_job(
-            day7_mail,
-            trigger=CronTrigger(minute="*/3"),
-            # То же, что и интервал, но задача тригера таким образом более понятна django
-            id="day7_mail",  # уникальный айди
-            max_instances=1,
-            replace_existing=True,
-        )
-        logger.info("Added job 'day7_mail'.")
+        # scheduler.add_job(
+        #     day7_mail,
+        #     trigger=CronTrigger(minute="*/3"),
+        #     # То же, что и интервал, но задача тригера таким образом более понятна django
+        #     id="day7_mail",  # уникальный айди
+        #     max_instances=1,
+        #     replace_existing=True,
+        # )
+        # logger.info("Added job 'day7_mail'.")
 
         scheduler.add_job(
             delete_old_job_executions,
