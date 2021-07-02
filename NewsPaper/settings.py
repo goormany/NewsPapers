@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
 from pathlib import Path
 import os
 
@@ -195,6 +194,12 @@ BASE_URL = 'http://127.0.0.1:8000'
 
 SERVER_EMAIL = 'testemops@yandex.ru'
 DEFAULT_FROM_EMAIL = 'testemops@yandex.ru'
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 INTERNAL_IPS = [
     '127.0.0.1',

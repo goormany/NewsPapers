@@ -36,25 +36,25 @@ from django.conf import settings
 #         recipient_list=sub_list
 #     )
 
-@receiver(post_save, sender=Post)
-def sub_mail_v2(sender, instance, **kwargs):
-    post = instance
-    sub_list = []
-    for sub in instance.category_id.subscribers.all():
-        sub_list.append(sub.email)
-    html_content = render_to_string(
-        'send_notify_post_create.html',
-        {
-            'username': sub,
-            'post': post,
-            'site': settings.BASE_URL,
-        }
-    )
-    msg = EmailMultiAlternatives(
-        subject=post.title,
-        body='text',
-        from_email='testemops@yandex.ru',
-        to=sub_list
-    )
-    msg.attach_alternative(html_content, "text/html")
-    msg.send()
+# @receiver(post_save, sender=Post)
+# def sub_mail_v2(sender, instance, **kwargs):
+#     post = instance
+#     sub_list = []
+#     for sub in instance.category_id.subscribers.all():
+#         sub_list.append(sub.email)
+#     html_content = render_to_string(
+#         'send_notify_post_create.html',
+#         {
+#             'username': sub,
+#             'post': post,
+#             'site': settings.BASE_URL,
+#         }
+#     )
+#     msg = EmailMultiAlternatives(
+#         subject=post.title,
+#         body='text',
+#         from_email='testemops@yandex.ru',
+#         to=sub_list
+#     )
+#     msg.attach_alternative(html_content, "text/html")
+#     msg.send()
