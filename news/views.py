@@ -33,6 +33,11 @@ class news(ListView):
         return Post.objects.filter(public=True).order_by('-data')
 
 
+    def get(self, request):
+        hello.delay()
+        return HttpResponse('Hello!')
+
+
 class new(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Post
     template_name = 'new_home.html'
