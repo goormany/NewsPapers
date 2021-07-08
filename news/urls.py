@@ -1,8 +1,10 @@
 from django.urls import path
 from .views import *
 
+from django.views.decorators.cache import cache_page
+
 urlpatterns = [
-    path('', news.as_view(), name='start_news'),
+    path('', cache_page(60)(news.as_view()), name='start_news'),
     path('<int:pk>', new.as_view(), name='news_detail'),
     path('search/', newSearch.as_view(), name='news_search'),
     path('add/', newsCreate.as_view(), name='news_add'),
@@ -14,5 +16,5 @@ urlpatterns = [
     path('category/sub/confirm/', SubsConfirm.as_view(), name='sub_confirm'),
     path('category/sub/unconfirm/', SubsUnConfirm.as_view(), name='sub_unconfirm'),
     path('categories/', CatigoriesView.as_view(), name = 'categories_list'),
-    path('post/category/<int:pk>', CategoryFilterView.as_view(), name='cate_filter'),
+    path('post/category/<int:pk>', cache_page(300)(CategoryFilterView.as_view()), name='cate_filter'),
 ]

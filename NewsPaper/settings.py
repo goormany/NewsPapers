@@ -37,15 +37,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #debug
     'debug_toolbar',
+
+    #cseditor admin
     'ckeditor',
     'ckeditor_uploader',
 
+    #django_apscheduler
     'django_apscheduler',
 
+    #fpages
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    #my appp
     'news.apps.NewsConfig',
     'accounts',
     'fpages',
@@ -53,9 +60,11 @@ INSTALLED_APPS = [
     'sign',
     'protect',
 
+    #allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
     # Провайдеры
     'allauth.socialaccount.providers.google',
 
@@ -204,6 +213,14 @@ CELERY_RESULT_SERIALIZER = 'json'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'cache_files'),
+        'TIMEOUT': 60,
+    }
+}
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

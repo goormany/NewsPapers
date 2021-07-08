@@ -1,20 +1,12 @@
-from datetime import datetime
-from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
 from django.http import HttpResponse
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
-from django.core.paginator import Paginator
 from .filters import newsFilter
 from .forms import NewsForm
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import login_required
-from django.core.mail import EmailMultiAlternatives, send_mail
-from django.template.loader import render_to_string
-from django.contrib.auth.models import User
-from .tasks import hello
+from django.core.cache import cache
 
 
 class news(ListView):
@@ -33,10 +25,6 @@ class news(ListView):
         return Post.objects.filter(public=True).order_by('-data')
 
 
-    def get(self, request):
-        hello.delay()
-        return HttpResponse('Hello!')
-
 
 class new(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Post
@@ -49,6 +37,16 @@ class new(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
         context['com_post'] = Comment.objects.filter(commentPost=self.kwargs['pk']).values("commentText")
         context['pc_post'] = PostCategory.objects.filter(pcPost=self.kwargs['pk'])
         return context
+
+    def get_object(self, *args, **kwargs):
+        obj = cache.get(f"new-{self.kwargs['pk']}", None)
+
+        if not obj:
+            obj = super().get_object(queryset=self.get_queryset())
+            cache.set(f"new-{self.kwargs['pk']}", obj)
+
+        return obj
+
 
 
 class newSearch(LoginRequiredMixin, PermissionRequiredMixin, ListView):
