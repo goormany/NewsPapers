@@ -19,7 +19,7 @@
         <div class="col-md-8">
             <div class="card-body">
                 <h5 class="card-title">{{new.title}}</h5>
-                <p class="card-text">{{new.text}}</p>
+                <p class="card-text">{{new.text|safe}}</p>
                 <hr>
                 <h5 class="card-text"><small class="text-dark">Рейтинг поста: {{new.rating}}</small></h5>
                 <p class="card-text"><small class="text-muted">Последние обнавление {{new.data_update}}</small></p>
@@ -31,7 +31,9 @@
 <!--comments-->
 <div class="section">
     <div class="container">
-        <h2>Комментарии({{post_comments_count}})</h2>
+        <h2>Комментарии({{post_comments_count}})</h2
+        <br>
+        <hr>
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <!--                display comment-->
@@ -48,7 +50,8 @@
                     </div>
                 </div>
                 {%endfor%}
-
+                <br>
+                <hr>
                 <!--                display the form-->
                 <form method="POST" action="{% url 'news_detail' new.pk %}">
                     {%csrf_token%}

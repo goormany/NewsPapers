@@ -14,7 +14,10 @@ NEW_UPDATE
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <div> {{ form.as_p }}</div>
+        <div>
+            {{form.media}}
+            {{ form.as_p }}
+        </div>
         <input type="submit" class="btn btn-warning" value="Редактировать">
     </form>
 </div>

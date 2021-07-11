@@ -2,6 +2,7 @@ from django.db import  models
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.core.cache import cache
+from ckeditor.fields import RichTextField
 
 class Author(models.Model):
     authorUser = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -60,7 +61,8 @@ class Post(models.Model):
     data_update = models.DateTimeField(auto_now=True, verbose_name='Дата редактирования')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото', blank=True, default='/photos/def/1.jpg/')
     previewName = models.CharField(max_length=128, verbose_name='Превью поста')
-    text = models.TextField(verbose_name='Текст поста')
+    # text = models.TextField(verbose_name='Текст поста')
+    text = RichTextField(blank=True, null=True, verbose_name='Текст поста')
     rating = models.SmallIntegerField(default=0, verbose_name='Рейтинг')
     public = models.BooleanField(default=True, verbose_name='Опубликовано')
 
