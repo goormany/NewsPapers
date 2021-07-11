@@ -1,3 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>{% extends 'flatpages/base.html' %} {% load custom_filters %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{%block title%} {{new.title}} {%endblock title%}</title>
+</head>
+<body>
+{%block content%}
+<div class="card mb-3" style="max-width: 1920px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            {%if new.photo%}
+            <img src="{{new.photo.url}}" class="img-fluid rounded-start" alt="...">
+            {%endif%}
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{new.title}}</h5>
+                <p class="card-text">{{new.text}}</p>
+                <hr>
+                <h5 class="card-text"><small class="text-dark">Рейтинг поста: {{new.rating}}</small></h5>
+                <p class="card-text"><small class="text-muted">Последние обнавление {{new.data_update}}</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--comments-->
+<div class="section">
+    <div class="container">
+        <h2>Комментарии({{post_comments_count}})</h2>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!--                display comment-->
+                {%for comment in post_comments%}
+                <div class="media-list">
+                    <div>
+                        <div class="media-body">
+                            <div class="small-1">
+                                <b>{{comment.user}}</b>
+                                <time class="ml-4 text-muted">{{comment.dataCreating}}</time>
+                            </div>
+                            <p>{{comment.commentText}}</p>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+
+                <!--                display the form-->
+                <form method="POST" action="{% url 'news_detail' new.pk %}">
+                    {%csrf_token%}
+                    <div class="form-group d-grid gap-2">
+                        <label for="{{form.commentText.id_for_label}}" class="form-label">Комментарий: </label>
+                        {{form.commentText}}
+                        <div class="invalid-feedback">
+                            {{form.commentText.errors}}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Комментировать</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+</body>
+</html>
+
+
+{%comment%}
 <!DOCTYPE html>
 <html lang="en">
 <head>{% extends 'flatpages/base.html' %} {% load custom_filters %}
@@ -9,7 +83,7 @@
 <h2>{{new.title|censor_filter}}</h2>
 <hr>
 {%if new.photo%}
-<img src="{{new.photo.url}}" width="275">
+<img src="{{new.photo.url}}" height="750px" width="750px" alt="750px">
 {%endif%}
 <h4>Пост опубликован: {{new.data}}</h4>
 <hr>
@@ -36,11 +110,7 @@
 <!--</div>-->
 
 <!--{%endfor%}-->
-
-{%for comment in com_post%}
-<p>Комментарии: {{comment.commentText}}</p>
-{%endfor%}
-
 {%endblock content%}
 </body>
 </html>
+{%endcomment%}

@@ -27,6 +27,6 @@ urlpatterns = [
     path('', include('protect.urls')),
     path('accounts/', include('allauth.urls')),
     path('sign/', include('sign.urls')),
-    path('__debug__/', include(debug_toolbar.urls)), # DEBUG
+    path('__debug__/', include(debug_toolbar.urls)),  # DEBUG
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -103,8 +103,8 @@ class PostCategory(models.Model):
 
 
 class Comment(models.Model):
-    commentPost = models.ForeignKey(Post, on_delete=models.CASCADE)
-    commentUser = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     commentText = models.TextField(max_length=60)
     dataCreating = models.DateTimeField(auto_now_add=True)
     rating = models.SmallIntegerField(default=0)
@@ -122,4 +122,4 @@ class Comment(models.Model):
         verbose_name_plural = 'Комменты'
 
     def __str__(self):
-        return f'{self.commentUser}: {self.commentPost}: {self.commentText}, {self.pk}'
+        return f'{self.user}: {self.post}: {self.commentText}, {self.pk}'
