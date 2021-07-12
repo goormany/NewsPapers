@@ -1,0 +1,17 @@
+celery==5.1.2
+Django==3.2.2
+django-allauth==0.44.0
+django-filter==2.4.0
+django-widget-tweaks==1.4.8
+Pillow==8.1.2
+redis==3.5.3
+pylint
+django-apscheduler==0.6.0
+django-ckeditor==6.1.0
+django-comments-dab==2.6.1
+django-debug-toolbar==3.2.1
+django-js-asset==1.2.2
+djangorestframework==3.12.4
+Pymem==1.8.4
+APScheduler==3.7.0
+Flask==1.1.2
