@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # comment
+    'comment',
+
     # debug
     'debug_toolbar',
 
@@ -68,6 +71,21 @@ INSTALLED_APPS = [
 
 ]
 SITE_ID = 1
+
+COMMENT_FLAGS_ALLOWED = 1
+COMMENT_FLAG_REASONS = [
+    (1, ('Спам')),
+    (2, ('Оскорбление')),
+    (3, ('Расизм')),
+    (4, ('Своя причина')),
+]
+
+USE_I18N = True
+USE_L18N = True
+COMMENT_ALLOW_TRANSLATION = True
+
+COMMENT_ALLOW_BLOCKING_USERS = True
+COMMENT_ALLOW_MODERATOR_TO_BLOCK = True
 
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/news/'
