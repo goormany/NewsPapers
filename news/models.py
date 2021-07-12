@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.core.cache import cache
 from ckeditor.fields import RichTextField
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 
 class Author(models.Model):
     authorUser = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -65,6 +67,7 @@ class Post(models.Model):
     text = RichTextField(blank=True, null=True, verbose_name='Текст поста')
     rating = models.SmallIntegerField(default=0, verbose_name='Рейтинг')
     public = models.BooleanField(default=True, verbose_name='Опубликовано')
+    comments = GenericRelation(Comment)
 
     def like(self):
         self.rating +=1
@@ -104,24 +107,24 @@ class PostCategory(models.Model):
         return f'{str(self.pcPost)}, имеет категорию {str(self.pcCategory)}'
 
 
-class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    commentText = models.TextField(max_length=60)
-    dataCreating = models.DateTimeField(auto_now_add=True)
-    rating = models.SmallIntegerField(default=0)
-
-    def like(self):
-        self.rating +=1
-        self.save()
-
-    def dislike(self):
-        self.rating -=1
-        self.save()
-
-    class Meta:
-        verbose_name = 'Коммент'
-        verbose_name_plural = 'Комменты'
-
-    def __str__(self):
-        return f'{self.user}: {self.post}: {self.commentText}, {self.pk}'
+# class Comment(models.Model):
+#     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     commentText = models.TextField(max_length=60)
+#     dataCreating = models.DateTimeField(auto_now_add=True)
+#     rating = models.SmallIntegerField(default=0)
+#
+#     def like(self):
+#         self.rating +=1
+#         self.save()
+#
+#     def dislike(self):
+#         self.rating -=1
+#         self.save()
+#
+#     class Meta:
+#         verbose_name = 'Коммент'
+#         verbose_name_plural = 'Комменты'
+#
+#     def __str__(self):
+#         return f'{self.user}: {self.post}: {self.commentText}, {self.pk}'

@@ -31,17 +31,17 @@ class NewsForm(ModelForm):
         }
 
 
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = Comment
-        fields = [
-            'commentText',
-        ]
-
-        widgets = {
-            'commentText': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 5,
-                'placeholder': 'Введите комментарий...',
-            })
-        }
+# class CommentForm(forms.ModelForm):
+#     class Meta:
+#         model = Comment
+#         fields = [
+#             'commentText',
+#         ]
+#
+#         widgets = {
+#             'commentText': forms.Textarea(attrs={
+#                 'class': 'form-control',
+#                 'rows': 5,
+#                 'placeholder': 'Введите комментарий...',
+#             })
+#         }

@@ -47,8 +47,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 # Вид админ панели комментарии
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'post', 'commentText', 'rating',)
+# class CommentAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'user', 'post', 'commentText', 'rating',)
 
 
 # Регистрация моделей в админку
@@ -56,4 +56,4 @@ admin.site.register(Author)
 admin.site.register(Post, PostAdmin)
 admin.site.register(PostCategory)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Comment, CommentAdmin)
+# admin.site.register(Comment, CommentAdmin)
