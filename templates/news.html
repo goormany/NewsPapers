@@ -1,4 +1,4 @@
-{%extends 'flatpages/base.html'%} {% load custom_filters %}
+{%extends 'flatpages/base.html'%} {% load custom_filters %}  {% load i18n %}
 
 {%block title%} Новостной портал {%endblock%}
 
@@ -23,7 +23,7 @@
     {%for el in news%}
     <div class="card mb-3">
         <div class="card-header">
-            Категории:
+            {% trans "Категории:" %}
             <form action="{% url 'category_detail' el.category_id.pk %}"><input class="btn btn-primary " type="submit"
                                                                                 value="{{el.category_id}}"></form>
         </div>
@@ -37,20 +37,20 @@
                 <div class="card-body">
                     <h5 class="card-title"><a style="color: #000000;" href="{% url 'news_detail' el.id %}">{{ el.title|censor_filter }}</a></h5>
                     <p class="card-text">{{ el.text|truncatewords:150|safe }}</p> <a
-                        href="{% url 'news_detail' el.id %}" class="btn btn-primary">Читать полную новость</a>
-                    <a href="{% url 'news_update' el.id %}" class="btn btn-primary">Редактировать пост</a>
-                    <a href="{% url 'news_delete' el.id %}" class="btn btn-danger">Удалить пост</a>
+                        href="{% url 'news_detail' el.id %}" class="btn btn-primary">{% trans "Читать полную новость" %}</a>
+                    <a href="{% url 'news_update' el.id %}" class="btn btn-primary">{% trans "Редактировать пост" %}</a>
+                    <a href="{% url 'news_delete' el.id %}" class="btn btn-danger">{% trans "Удалить пост" %}</a>
                 </div>
             </div>
             <br>
             <div
-                    class="card-footer text-muted " style="text-align: right;">Рейтинг статьи: {{el.rating}}<br>
-                Дата публикации {{ el.data|date:'d M Y H:m' }}
+                    class="card-footer text-muted " style="text-align: right;">{% trans "Рейтинг статьи:" %} {{el.rating}}<br>
+                {% trans "Дата публикации" %} {{ el.data|date:'d M Y H:m' }}
             </div>
         </div>
     </div>
     {% empty %}
-        <h3>Постов нет в данной категории</h3>
+        <h3>{% trans "Постов нет в данной категории" %}</h3>
     {%endfor%}
 </div>
 {%endblock%}
