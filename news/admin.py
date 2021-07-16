@@ -2,6 +2,7 @@ from django import forms
 from django.contrib import admin
 from .models import *
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from modeltranslation.admin import TranslationAdmin
 
 
 # Действие в админ панели 'Снять пост с публикации'
@@ -21,7 +22,8 @@ public_on.short_description = 'Опубликовать пост'
 
 
 class PostAdminForm(forms.ModelForm):
-    text = forms.CharField(widget=CKEditorUploadingWidget())  # Новый редактор текста в админке
+    text_ru = forms.CharField(widget=CKEditorUploadingWidget())  # Новый редактор текста в админке
+    text_en_us = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
         model = Post
@@ -29,7 +31,7 @@ class PostAdminForm(forms.ModelForm):
 
 
 # Вид админ панели постов
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(TranslationAdmin):
     form = PostAdminForm
     list_display = ('id', 'title', 'positions', 'category_id', 'data', 'data_update', 'rating', "public")
     list_display_links = ('id', 'title',)
@@ -40,7 +42,7 @@ class PostAdmin(admin.ModelAdmin):
 
 
 # Вид админ панели категории
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     list_display = ('id', 'category_name')
     list_display_links = ('id', 'category_name',)
     search_fields = ('title',)

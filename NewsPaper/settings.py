@@ -29,6 +29,9 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    #translate
+    'modeltranslation',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -71,6 +74,11 @@ INSTALLED_APPS = [
 
 ]
 SITE_ID = 1
+
+LANGUAGES = [
+    ('en-us', 'English'),
+    ('ru', 'Русский')
+]
 
 COMMENT_FLAGS_ALLOWED = 1
 COMMENT_FLAG_REASONS = [
