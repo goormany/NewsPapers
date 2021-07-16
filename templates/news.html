@@ -1,6 +1,6 @@
 {%extends 'flatpages/base.html'%} {% load custom_filters %}  {% load i18n %}
 
-{%block title%} Новостной портал {%endblock%}
+{%block title%} {% trans "Новостной портал" %} {%endblock%}
 
 
 {%block sidebar%}
@@ -8,11 +8,11 @@
 {% cache 60 sidebar %}
     <div class="col-md-4">
         <div class="list-group">
-            <a href="{% url 'start_news' %}" class="list-group-item list-group-item active mb-1">Все категории</a>
+            <a href="{% url 'start_news' %}" class="list-group-item list-group-item active mb-1">{% trans "Все категории" %}</a>
             {%for el in cate%}
             <a href="{% url 'cate_filter' el.pk %}" class="list-group-item list-group-item-action active">{{el.category_name}}</a>
             {%endfor%}
-            <a href="{% url 'news_add' %}" class="list-group-item list-group-item active mt-1">Создать пост</a>
+            <a href="{% url 'news_add' %}" class="list-group-item list-group-item active mt-1">{% trans "Создать пост" %}</a>
         </div>
     </div>
 {%endcache%}
