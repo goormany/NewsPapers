@@ -108,6 +108,7 @@ class PostCategory(models.Model):
 
 
 # class Comment(models.Model):
+
 #     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 #     user = models.ForeignKey(User, on_delete=models.CASCADE)
 #     commentText = models.TextField(max_length=60)
